@@ -1,6 +1,6 @@
 # esx_duels
  A FiveM 1vs1 Duels system
-This resource is fully dependent on newest version of the ESX Framework.
+This resource is fully dependent on newest version of the ESX Framework. (1.11.4)
 
 ```lua
 -- Export function to check if player is in active duel [client/match.lua]
