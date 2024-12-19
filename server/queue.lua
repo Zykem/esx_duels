@@ -44,15 +44,8 @@ local function joinQueue(lobby)
     local source = source
     lobby = lobby or 'main'
 
-    if not Config.allowedLobbies[lobby] then
-        print(('Invalid lobby (%s) tried to be joined by playerId %s'):format(lobby, source))
-        return
-    end
-
-    if isInQueue(source) then
-        print(('playerId %s is trying to join a queue when he already is in one.'):format(source))
-        return
-    end
+    assert(Config.allowedLobbies[lobby] ~= nil, ('Lobby %s is not allowed.'):format(lobby))
+    assert(isInQueue(source) == false, 'Player is already in a queue.')
 
     Player(source).state:set('inDuelQueue', true, true)
     local xPlayer = ESX.GetPlayerFromId(source)
@@ -64,17 +57,9 @@ end
 ---@return nil
 local function leaveQueue(lobby)
     local source = source
-    if not isInQueue(source) then
-        return
-    end
-
-    if not queues[lobby] then
-        return
-    end
-
-    if not queues[lobby][source] then
-        return
-    end
+    
+    assert(queues[lobby] ~= nil, ('Queue %s does not exist.'):format(lobby))
+    assert(isInQueue(source) == true, 'Player is not in a queue.')
 
     Player(source).state:set('inDuelQueue', false, true)
     queues[lobby][source] = nil

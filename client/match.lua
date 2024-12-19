@@ -1,7 +1,7 @@
 local currentMatch, initialPosition = nil, nil
 
 local function handleBorder()
-    assert(currentMatch.map.centerCoords, 'Map center coords are missing.')
+    assert(currentMatch.map.centerCoords ~= nil, 'Map center coords are missing.')
 
     currentMatch.map.radius = currentMatch.map.radius or 50.0
     currentMatch.map.drawBorderDistance = currentMatch.map.drawBorderDistance or 40.0
@@ -29,11 +29,10 @@ local function handleBorder()
 end
 
 local function handleWeapons()
-    if currentMatch.map.weapon then
-        ESX.AssertType(currentMatch.map.weapon, 'string', 'currentMatch->weapon is not a weapon name (string).')
-    else
+    if not currentMatch.map.weapon then 
         return -- early return, no need to have a loop running if currentMatch->weapon is nil
     end
+    ESX.AssertType(currentMatch.map.weapon, 'string', 'currentMatch->weapon is not a weapon name (string).')
 
     if Config.oxInventory then
         -- Enabling weapon wheel so we can use weapons that arent in the inventory
