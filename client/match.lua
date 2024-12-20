@@ -54,7 +54,7 @@ local function handleWeapons()
         RemoveWeaponFromPed(ESX.PlayerData.ped, requiredWeapon)
         SetCurrentPedWeapon(ESX.PlayerData.ped, `WEAPON_UNARMED`, true)
         Wait(100)
-    until GetSelectedPedWeapon(ESX.PlayerData.ped) or tries >= 10
+    until GetSelectedPedWeapon(ESX.PlayerData.ped) == `WEAPON_UNARMED` or tries >= 10
 
     if Config.oxInventory then
         exports.ox_inventory:weaponWheel(false)
