@@ -2,9 +2,7 @@ local interactions = {}
 
 ---@param interaction Interaction
 local function createInteraction(interaction)
-    if not interaction then
-        error('Interaction does not exist.')
-    end
+    assert(interaction ~= nil, "Interaction does not exist.")
 
     interaction.pedModel = interaction.pedModel or Config.defaultPedModel
     interaction.lobby = interaction.lobby or 'main'
