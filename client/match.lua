@@ -12,8 +12,8 @@ local function handleBorder()
         local distance = #(ESX.PlayerData.coords - currentMatch.map.centerCoords)
 
         if distance >= currentMatch.map.radius then
-            local sleepMs = GetEntityHealth(ESX.PlayerData.ped)
-            SetEntityHealth(ESX.PlayerData.ped, sleepMs - 10.0)
+            local currentPedHealth = GetEntityHealth(ESX.PlayerData.ped)
+            SetEntityHealth(ESX.PlayerData.ped, currentPedHealth - 10.0)
             ESX.ShowNotification('Return to the map area or you will take damage!')
         end
 
