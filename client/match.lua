@@ -32,7 +32,7 @@ local function handleWeapons()
     if not currentMatch.map.weapon then 
         return -- early return, no need to have a loop running if currentMatch->weapon is nil
     end
-    ESX.AssertType(currentMatch.map.weapon, 'string', 'currentMatch->weapon is not a weapon name (string).')
+    ESX.AssertType(currentMatch.map.weapon, 'string')
 
     if Config.oxInventory then
         -- Enabling weapon wheel so we can use weapons that arent in the inventory
@@ -73,14 +73,8 @@ end
 ---@param matchData table The data for the match
 local function matchStarted(matchData)
     assert(matchData ~= nil, 'matchData should not be nil.')
-    
-    if not Config.allowedLobbies[matchData.lobby] then
-        error('Tried to start match in disallowed lobby.')
-    end
-    
-    if not matchData.map then
-        error('Match Map is nil, something went wrong.')
-    end
+    assert(Config.allowedLobbies[matchData.lobby] ~= nil, 'Tried to start match in disallowed lobby.')
+    assert(matchData.map ~= nil, 'Match Map is nil, something went wrong.')
 
     if LocalPlayer.state.isDead then
         TriggerEvent(Config.reviveEvent)
