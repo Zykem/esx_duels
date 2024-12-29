@@ -1,6 +1,7 @@
 local duelInvites = {}
 
 ---@param data table The data related to the player's death
+---@return nil
 local function onPlayerDeath(data)
     local source = source
     local match = GetMatchFromPlayer(source)
@@ -20,6 +21,7 @@ end
 
 ---@param source number The source of the player sending the invite
 ---@param args table The command arguments
+---@return nil
 local function duelCommand(source, args)
     local target = args[1]
     local xPlayer = ESX.GetPlayerFromId(source)
@@ -34,6 +36,8 @@ local function duelCommand(source, args)
     duelInvites[source] = tonumber(target)
 end
 
+---@param invitedBy number The server is of the player that invited source
+---@return nil
 local function acceptDuelInvite(invitedBy)
     local source = source
     local xPlayer = ESX.GetPlayerFromId(source)
